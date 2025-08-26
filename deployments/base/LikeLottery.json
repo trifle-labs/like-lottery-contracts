@@ -1,0 +1,70 @@
+{
+  "address": "0x7053C34C8c42255cBe00E10c059c4bEeD9816C6A",
+  "abi": [
+    {
+      "type": "constructor",
+      "payable": false,
+      "inputs": []
+    },
+    {
+      "type": "event",
+      "anonymous": false,
+      "name": "Crank",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "user",
+          "indexed": true
+        },
+        {
+          "type": "uint256",
+          "name": "timestamp",
+          "indexed": true
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "CRANK_INTERVAL",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "crank",
+      "constant": false,
+      "payable": false,
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "crankTimes",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [
+        {
+          "type": "address"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "uint256"
+        }
+      ]
+    }
+  ],
+  "transactionHash": "0x0009a853ee247302305edbd88e1f382043cb3efc0d2acd6f8a411802540a64cc",
+  "blockNumber": 34714821,
+  "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+  "network": "base",
+  "timestamp": "2025-08-26T14:42:44.351Z"
+}
