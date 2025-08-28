@@ -50,7 +50,7 @@ describe('Package Import Tests (JavaScript)', () => {
     it('should handle getNetworkName function correctly', () => {
       const networkName = commonjsPackage.getNetworkName(31337);
       expect(networkName).to.equal('localhost');
-      
+
       const baseNetwork = commonjsPackage.getNetworkName(8453);
       expect(baseNetwork).to.equal('base');
     });
@@ -73,7 +73,7 @@ describe('Package Import Tests (JavaScript)', () => {
   describe('Error Handling', () => {
     it('should handle unknown chain ID in getNetworkName', () => {
       const commonjs = require('../src/index.js');
-      
+
       expect(() => {
         commonjs.getNetworkName(999999);
       }).to.throw('Unknown chain ID: 999999');
@@ -81,7 +81,7 @@ describe('Package Import Tests (JavaScript)', () => {
 
     it('should handle unknown chain ID in getContractAddress gracefully', () => {
       const commonjs = require('../src/index.js');
-      
+
       const result = commonjs.getContractAddress(999999, 'LikeLottery');
       expect(result).to.be.undefined;
     });
@@ -90,20 +90,20 @@ describe('Package Import Tests (JavaScript)', () => {
   describe('Real-world Usage Simulation', () => {
     it('should simulate typical usage patterns with CommonJS', () => {
       const pkg = require('../src/index.js');
-      
+
       // Simulate getting network info for a chain ID
       const chainId = 8453; // Base mainnet
       const networkName = pkg.getNetworkName(chainId);
       expect(networkName).to.equal('base');
-      
+
       // Simulate getting contract address
       const contractAddress = pkg.getContractAddress(chainId, 'LikeLottery');
       // Address might be undefined, but function should work
       expect(pkg.getContractAddress).to.be.a('function');
-      
+
       // Simulate accessing contract ABI
       expect(pkg.LikeLottery.abi).to.be.an('array');
-      
+
       // Simulate getting deployment info
       const deployment = pkg.LikeLottery.getDeployment('base');
       // Deployment might be null, but function should work
@@ -130,7 +130,7 @@ describe('Package Import Tests (JavaScript)', () => {
   describe('CommonJS Specific Tests', () => {
     it('should work with destructuring assignment', () => {
       const { NetworkName, ChainId, LikeLottery } = require('../src/index.js');
-      
+
       expect(NetworkName.LOCALHOST).to.equal('localhost');
       expect(ChainId.LOCALHOST).to.equal(31337);
       expect(LikeLottery).to.have.property('abi');
@@ -138,7 +138,7 @@ describe('Package Import Tests (JavaScript)', () => {
 
     it('should work with individual property access', () => {
       const pkg = require('../src/index.js');
-      
+
       // Test individual property access
       expect(pkg.NetworkName).to.be.an('object');
       expect(pkg.ChainId).to.be.an('object');
@@ -150,7 +150,7 @@ describe('Package Import Tests (JavaScript)', () => {
     it('should maintain object references', () => {
       const pkg1 = require('../src/index.js');
       const pkg2 = require('../src/index.js');
-      
+
       // Node.js caches modules, so they should be the same reference
       expect(pkg1).to.equal(pkg2);
       expect(pkg1.NetworkName).to.equal(pkg2.NetworkName);

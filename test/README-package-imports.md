@@ -5,9 +5,11 @@ This directory contains comprehensive tests for importing and using both the `in
 ## Test Files
 
 ### 1. `package-imports.test.ts` - TypeScript Tests
+
 Comprehensive tests that verify both CommonJS and ES6 import methods work correctly with both packages.
 
 **Features tested:**
+
 - ✅ CommonJS require of `index.js`
 - ✅ ES6 import of `index.ts`
 - ✅ Dynamic imports of both packages
@@ -16,6 +18,7 @@ Comprehensive tests that verify both CommonJS and ES6 import methods work correc
 - ✅ Real-world usage patterns
 
 **Import methods tested:**
+
 ```typescript
 // CommonJS
 const pkg = require('../src/index.js');
@@ -28,9 +31,11 @@ const pkg = await import('../src/index.js');
 ```
 
 ### 2. `package-imports.test.js` - JavaScript Tests
+
 JavaScript-specific tests that focus on CommonJS functionality and avoid TypeScript imports.
 
 **Features tested:**
+
 - ✅ CommonJS require of `index.js`
 - ✅ Dynamic import of `index.js`
 - ✅ Error handling
@@ -39,9 +44,11 @@ JavaScript-specific tests that focus on CommonJS functionality and avoid TypeScr
 - ✅ CommonJS-specific features (destructuring, caching, etc.)
 
 ### 3. `package-usage-example.js` - Usage Examples
+
 A practical example script showing real-world usage patterns for both packages.
 
 **Examples demonstrated:**
+
 - CommonJS require usage
 - ES6 dynamic import usage
 - Contract information access
@@ -51,21 +58,25 @@ A practical example script showing real-world usage patterns for both packages.
 ## Running the Tests
 
 ### Run TypeScript Tests
+
 ```bash
 npm test -- test/package-imports.test.ts
 ```
 
 ### Run JavaScript Tests
+
 ```bash
 npm test -- test/package-imports.test.js
 ```
 
 ### Run All Package Import Tests
+
 ```bash
 npm test -- test/package-imports.test.ts test/package-imports.test.js
 ```
 
 ### Run Usage Example
+
 ```bash
 node test/package-usage-example.js
 ```
@@ -73,7 +84,9 @@ node test/package-usage-example.js
 ## What the Tests Verify
 
 ### Package Exports
+
 Both packages export the same functionality:
+
 - `NetworkName` - Network name constants
 - `ChainId` - Chain ID constants
 - `LikeLottery` - Contract information object
@@ -83,6 +96,7 @@ Both packages export the same functionality:
 - `getContractAddress(chainId, contractName)` - Get contract address
 
 ### Import Compatibility
+
 - ✅ CommonJS environments can use `require('../src/index.js')`
 - ✅ ES6 environments can use `import('../src/index.ts')`
 - ✅ Both methods provide identical functionality
@@ -90,11 +104,13 @@ Both packages export the same functionality:
 - ✅ Package.json exports are properly configured
 
 ### Error Handling
+
 - ✅ Unknown chain IDs throw appropriate errors
 - ✅ Graceful handling of missing deployments
 - ✅ Proper error messages for debugging
 
 ### Real-world Usage
+
 - ✅ Contract ABI access
 - ✅ Network-specific address retrieval
 - ✅ Deployment information access
@@ -105,6 +121,7 @@ Both packages export the same functionality:
 The project exports two main entry points:
 
 1. **`src/index.js`** (CommonJS)
+
    - Main entry point for Node.js environments
    - Compatible with `require()` and `import()`
    - Exports all functionality as CommonJS module
@@ -117,6 +134,7 @@ The project exports two main entry points:
 ## Usage Patterns
 
 ### CommonJS Environment
+
 ```javascript
 const { NetworkName, ChainId, LikeLottery } = require('@trifle/like-lottery-contracts');
 
@@ -125,6 +143,7 @@ const pkg = require('@trifle/like-lottery-contracts');
 ```
 
 ### ES6 Environment
+
 ```typescript
 import { NetworkName, ChainId, LikeLottery } from '@trifle/like-lottery-contracts';
 
@@ -133,6 +152,7 @@ import * as pkg from '@trifle/like-lottery-contracts';
 ```
 
 ### Dynamic Import
+
 ```javascript
 // Works in both CommonJS and ES6 environments
 const pkg = await import('@trifle/like-lottery-contracts');
@@ -141,6 +161,7 @@ const pkg = await import('@trifle/like-lottery-contracts');
 ## Test Results
 
 When all tests pass, you should see:
+
 - **TypeScript tests**: 23 passing tests
 - **JavaScript tests**: 17 passing tests
 - **Total**: 40 passing tests
@@ -152,10 +173,12 @@ This ensures that both packages work correctly in all supported environments and
 ### Common Issues
 
 1. **Module not found errors**
+
    - Ensure you're running tests from the project root
    - Check that `src/index.js` and `src/index.ts` exist
 
 2. **TypeScript import errors**
+
    - JavaScript tests cannot import `.ts` files directly
    - Use `index.js` for JavaScript environments
 
