@@ -154,7 +154,6 @@ export const LikeLottery = {
   abi: LikeLotteryABI,
   addresses: {
     [ChainId.LOCALHOST]: addresses[NetworkName.LOCALHOST]?.LikeLottery,
-    [ChainId.HARDHAT]: addresses[NetworkName.HARDHAT]?.LikeLottery,
     [ChainId.BASE_SEPOLIA]: addresses[NetworkName.BASE_SEPOLIA]?.LikeLottery,
     [ChainId.BASE]: addresses[NetworkName.BASE]?.LikeLottery,
   },
