@@ -1,12 +1,12 @@
-import * as fs from "fs";
-import * as path from "path";
+import * as fs from 'fs';
+import * as path from 'path';
 
 // Network names mapping
 export enum NetworkName {
-  LOCALHOST = "localhost",
-  HARDHAT = "hardhat", 
-  BASE_SEPOLIA = "baseSepolia",
-  BASE = "base"
+  LOCALHOST = 'localhost',
+  HARDHAT = 'hardhat',
+  BASE_SEPOLIA = 'baseSepolia',
+  BASE = 'base',
 }
 
 // Chain IDs
@@ -14,7 +14,23 @@ export enum ChainId {
   LOCALHOST = 31337,
   HARDHAT = 31337,
   BASE_SEPOLIA = 84532,
-  BASE = 8453
+  BASE = 8453,
+}
+
+// Network name mapping function
+export function getNetworkName(chainId: number): NetworkName {
+  switch (chainId) {
+    case ChainId.LOCALHOST:
+      return NetworkName.LOCALHOST;
+    case ChainId.HARDHAT:
+      return NetworkName.HARDHAT;
+    case ChainId.BASE_SEPOLIA:
+      return NetworkName.BASE_SEPOLIA;
+    case ChainId.BASE:
+      return NetworkName.BASE;
+    default:
+      throw new Error(`Unknown chain ID: ${chainId}`);
+  }
 }
 
 // Type definitions
@@ -36,9 +52,15 @@ export interface ContractAddresses {
 // Helper function to load deployment info
 function loadDeployment(network: string, contractName: string): DeploymentInfo | null {
   try {
-    const deploymentPath = path.join(__dirname, "..", "deployments", network, `${contractName}.json`);
+    const deploymentPath = path.join(
+      __dirname,
+      '..',
+      'deployments',
+      network,
+      `${contractName}.json`
+    );
     if (fs.existsSync(deploymentPath)) {
-      return JSON.parse(fs.readFileSync(deploymentPath, "utf8"));
+      return JSON.parse(fs.readFileSync(deploymentPath, 'utf8'));
     }
   } catch (error) {
     console.error(`Failed to load deployment for ${contractName} on ${network}:`, error);
@@ -49,9 +71,9 @@ function loadDeployment(network: string, contractName: string): DeploymentInfo |
 // Helper function to load addresses for a network
 function loadAddresses(network: string): ContractAddresses {
   try {
-    const addressesPath = path.join(__dirname, "..", "deployments", network, "addresses.json");
+    const addressesPath = path.join(__dirname, '..', 'deployments', network, 'addresses.json');
     if (fs.existsSync(addressesPath)) {
-      return JSON.parse(fs.readFileSync(addressesPath, "utf8"));
+      return JSON.parse(fs.readFileSync(addressesPath, 'utf8'));
     }
   } catch (error) {
     console.error(`Failed to load addresses for ${network}:`, error);
@@ -62,13 +84,20 @@ function loadAddresses(network: string): ContractAddresses {
 // Export contract ABIs (loaded from artifacts)
 export const LikeLotteryABI = (() => {
   try {
-    const artifactPath = path.join(__dirname, "..", "artifacts", "contracts", "LikeLottery.sol", "LikeLottery.json");
+    const artifactPath = path.join(
+      __dirname,
+      '..',
+      'artifacts',
+      'contracts',
+      'LikeLottery.sol',
+      'LikeLottery.json'
+    );
     if (fs.existsSync(artifactPath)) {
-      const artifact = JSON.parse(fs.readFileSync(artifactPath, "utf8"));
+      const artifact = JSON.parse(fs.readFileSync(artifactPath, 'utf8'));
       return artifact.abi;
     }
   } catch (error) {
-    console.error("Failed to load LikeLottery ABI:", error);
+    console.error('Failed to load LikeLottery ABI:', error);
   }
   return [];
 })();
@@ -84,23 +113,23 @@ export const addresses = {
 // Export full deployment info by network
 export const deployments = {
   [NetworkName.LOCALHOST]: {
-    LikeLottery: loadDeployment(NetworkName.LOCALHOST, "LikeLottery")
+    LikeLottery: loadDeployment(NetworkName.LOCALHOST, 'LikeLottery'),
   },
   [NetworkName.HARDHAT]: {
-    LikeLottery: loadDeployment(NetworkName.HARDHAT, "LikeLottery")
+    LikeLottery: loadDeployment(NetworkName.HARDHAT, 'LikeLottery'),
   },
   [NetworkName.BASE_SEPOLIA]: {
-    LikeLottery: loadDeployment(NetworkName.BASE_SEPOLIA, "LikeLottery")
+    LikeLottery: loadDeployment(NetworkName.BASE_SEPOLIA, 'LikeLottery'),
   },
   [NetworkName.BASE]: {
-    LikeLottery: loadDeployment(NetworkName.BASE, "LikeLottery")
+    LikeLottery: loadDeployment(NetworkName.BASE, 'LikeLottery'),
   },
 };
 
 // Helper function to get contract address by chain ID
 export function getContractAddress(chainId: number, contractName: string): string | undefined {
   let network: NetworkName;
-  
+
   switch (chainId) {
     case ChainId.LOCALHOST:
     case ChainId.HARDHAT:
@@ -129,6 +158,6 @@ export const LikeLottery = {
     [ChainId.BASE_SEPOLIA]: addresses[NetworkName.BASE_SEPOLIA]?.LikeLottery,
     [ChainId.BASE]: addresses[NetworkName.BASE]?.LikeLottery,
   },
-  getAddress: (chainId: number) => getContractAddress(chainId, "LikeLottery"),
-  getDeployment: (network: NetworkName) => deployments[network]?.LikeLottery
+  getAddress: (chainId: number) => getContractAddress(chainId, 'LikeLottery'),
+  getDeployment: (network: NetworkName) => deployments[network]?.LikeLottery,
 };

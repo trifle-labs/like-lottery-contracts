@@ -94,6 +94,22 @@ const deployments = {
   },
 };
 
+// Network name mapping function
+function getNetworkName(chainId) {
+  switch (chainId) {
+    case ChainId.LOCALHOST:
+      return NetworkName.LOCALHOST;
+    case ChainId.HARDHAT:
+      return NetworkName.HARDHAT;
+    case ChainId.BASE_SEPOLIA:
+      return NetworkName.BASE_SEPOLIA;
+    case ChainId.BASE:
+      return NetworkName.BASE;
+    default:
+      throw new Error(`Unknown chain ID: ${chainId}`);
+  }
+}
+
 // Helper function to get contract address by chain ID
 function getContractAddress(chainId, contractName) {
   let network;
@@ -134,6 +150,7 @@ module.exports = {
   NetworkName,
   ChainId,
   addresses,
+  getNetworkName,
   deployments,
   getContractAddress,
   LikeLotteryABI,
