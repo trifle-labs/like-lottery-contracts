@@ -44,3 +44,5 @@ deployments/localhost
 
 # Ignition
 ignition/deployments
+
+.parcel-cache

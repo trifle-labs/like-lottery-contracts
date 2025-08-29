@@ -66,5 +66,6 @@
   "blockNumber": 30225288,
   "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
   "network": "baseSepolia",
+  "chainId": 84532,
   "timestamp": "2025-08-26T14:42:44.351Z"
 }
