@@ -1,6 +1,6 @@
 {
   "name": "@trifle/like-lottery-contracts",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Smart contracts for Like Lottery",
   "main": "dist/module.js",
   "module": "dist/module.js",
