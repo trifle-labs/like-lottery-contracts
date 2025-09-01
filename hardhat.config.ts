@@ -4,7 +4,6 @@ import '@nomiclabs/hardhat-etherscan';
 import '@nomiclabs/hardhat-ethers';
 import '@typechain/hardhat';
 import 'hardhat-gas-reporter';
-import 'solidity-coverage';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
