@@ -97,6 +97,10 @@ function getContractAddress(chainId: number, contractName: string): string | und
 // Export convenience functions for specific contracts
 export const LikeLottery = {
   abi: LikeLotteryABI,
+  networks: {
+    [ChainId.BASE_SEPOLIA]: LikeLotteryBaseSepolia,
+    [ChainId.BASE]: LikeLotteryBase,
+  },
   addresses: {
     [ChainId.BASE_SEPOLIA]: addresses[NetworkName.BASE_SEPOLIA]?.LikeLottery,
     [ChainId.BASE]: addresses[NetworkName.BASE]?.LikeLottery,

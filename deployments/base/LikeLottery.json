@@ -1,5 +1,5 @@
 {
-  "address": "0x7053C34C8c42255cBe00E10c059c4bEeD9816C6A",
+  "address": "0xD87f83Cf6a26F2451e55B489E968B1427B0fBBf7",
   "abi": [
     {
       "type": "constructor",
@@ -25,47 +25,17 @@
     },
     {
       "type": "function",
-      "name": "CRANK_INTERVAL",
-      "constant": true,
-      "stateMutability": "view",
-      "payable": false,
-      "inputs": [],
-      "outputs": [
-        {
-          "type": "uint256"
-        }
-      ]
-    },
-    {
-      "type": "function",
       "name": "crank",
       "constant": false,
       "payable": false,
       "inputs": [],
       "outputs": []
-    },
-    {
-      "type": "function",
-      "name": "crankTimes",
-      "constant": true,
-      "stateMutability": "view",
-      "payable": false,
-      "inputs": [
-        {
-          "type": "address"
-        }
-      ],
-      "outputs": [
-        {
-          "type": "uint256"
-        }
-      ]
     }
   ],
-  "transactionHash": "0x0009a853ee247302305edbd88e1f382043cb3efc0d2acd6f8a411802540a64cc",
-  "blockNumber": 34714821,
-  "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+  "transactionHash": "0xb68c707d696d0a1bab9fa215e580dd952e6e8bb10543aab2763082a3f68844ca",
+  "blockNumber": 34980437,
+  "deployer": "0xc795344b1b30E3CfEE1AFA1D5204B141940CF445",
   "network": "base",
   "chainId": 8453,
-  "timestamp": "2025-08-26T14:42:44.351Z"
+  "timestamp": "2025-09-01T18:10:19.774Z"
 }
