@@ -1,7 +1,9 @@
 import LikeLotteryBase from '../deployments/base/LikeLottery.json';
+import LikeLotteryDrawBase from '../deployments/base/LikeLotteryDraw.json';
 import LikeLotteryBaseAddresses from '../deployments/base/addresses.json';
 
 import LikeLotteryBaseSepolia from '../deployments/baseSepolia/LikeLottery.json';
+import LikeLotteryDrawBaseSepolia from '../deployments/baseSepolia/LikeLotteryDraw.json';
 import LikeLotteryBaseSepoliaAddresses from '../deployments/baseSepolia/addresses.json';
 
 // Network names mapping
@@ -48,15 +50,16 @@ export interface DeploymentInfo {
 
 export interface ContractAddresses {
   LikeLottery?: string;
+  LikeLotteryDraw?: string;
 }
 
 // Helper function to load deployment info
-function loadDeployment(network: string): DeploymentInfo | null {
+function loadDeployment(network: string, contractName: string): DeploymentInfo | null {
   switch (network) {
     case NetworkName.BASE_SEPOLIA:
-      return LikeLotteryBaseSepolia;
+      return contractName === 'LikeLottery' ? LikeLotteryBaseSepolia : LikeLotteryDrawBaseSepolia;
     case NetworkName.BASE:
-      return LikeLotteryBase;
+      return contractName === 'LikeLottery' ? LikeLotteryBase : LikeLotteryDrawBase;
     default:
       throw new Error(`Unknown network: ${network}`);
   }
@@ -64,14 +67,17 @@ function loadDeployment(network: string): DeploymentInfo | null {
 
 // Export contract ABIs (loaded from artifacts)
 const LikeLotteryABI = LikeLotteryBase.abi;
+const LikeLotteryDrawABI = LikeLotteryDrawBase.abi;
 
 // Export full deployment info by network
 const deployments = {
   [NetworkName.BASE_SEPOLIA]: {
-    LikeLottery: loadDeployment(NetworkName.BASE_SEPOLIA),
+    LikeLottery: loadDeployment(NetworkName.BASE_SEPOLIA, 'LikeLottery'),
+    LikeLotteryDraw: loadDeployment(NetworkName.BASE_SEPOLIA, 'LikeLotteryDraw'),
   },
   [NetworkName.BASE]: {
-    LikeLottery: loadDeployment(NetworkName.BASE),
+    LikeLottery: loadDeployment(NetworkName.BASE, 'LikeLottery'),
+    LikeLotteryDraw: loadDeployment(NetworkName.BASE, 'LikeLotteryDraw'),
   },
 };
 
@@ -107,4 +113,18 @@ export const LikeLottery = {
   },
   getAddress: (chainId: number) => getContractAddress(chainId, 'LikeLottery'),
   getDeployment: (network: NetworkName) => deployments[network]?.LikeLottery,
+};
+
+export const LikeLotteryDraw = {
+  abi: LikeLotteryDrawABI,
+  networks: {
+    [ChainId.BASE_SEPOLIA]: LikeLotteryDrawBaseSepolia,
+    [ChainId.BASE]: LikeLotteryDrawBase,
+  },
+  addresses: {
+    [ChainId.BASE_SEPOLIA]: addresses[NetworkName.BASE_SEPOLIA]?.LikeLotteryDraw,
+    [ChainId.BASE]: addresses[NetworkName.BASE]?.LikeLotteryDraw,
+  },
+  getAddress: (chainId: number) => getContractAddress(chainId, 'LikeLotteryDraw'),
+  getDeployment: (network: NetworkName) => deployments[network]?.LikeLotteryDraw,
 };

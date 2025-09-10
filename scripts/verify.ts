@@ -1,25 +1,26 @@
-import { run } from "hardhat";
+import { run } from 'hardhat';
 
 async function main() {
   const contractAddress = process.env.CONTRACT_ADDRESS;
+  const contractName = process.env.CONTRACT_NAME || 'LikeLottery';
 
   if (!contractAddress) {
-    throw new Error("Please set CONTRACT_ADDRESS in your environment variables");
+    throw new Error('Please set CONTRACT_ADDRESS in your environment variables');
   }
 
-  console.log("Verifying contract at address:", contractAddress);
+  console.log(`Verifying ${contractName} contract at address:`, contractAddress);
 
   try {
-    await run("verify:verify", {
+    await run('verify:verify', {
       address: contractAddress,
       constructorArguments: [],
     });
-    console.log("Contract verified successfully!");
+    console.log(`${contractName} contract verified successfully!`);
   } catch (error: any) {
-    if (error.message.toLowerCase().includes("already verified")) {
-      console.log("Contract is already verified!");
+    if (error.message.toLowerCase().includes('already verified')) {
+      console.log(`${contractName} contract is already verified!`);
     } else {
-      console.error("Error verifying contract:", error);
+      console.error(`Error verifying ${contractName} contract:`, error);
       throw error;
     }
   }
