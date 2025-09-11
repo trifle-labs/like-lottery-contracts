@@ -14,16 +14,7 @@ async function main() {
 
   const LikeLotteryDraw = await ethers.getContractFactory('LikeLotteryDraw');
 
-  const usedAddresses = {
-    base: '0x833589fcd6edb6e08f4c7c32d4f71b54bda02913',
-    baseSepolia: '0x036CbD53842c5426634e7929541eC2318f3dCF7e',
-  };
-  const usdcAddress = usedAddresses[network.name as keyof typeof usedAddresses];
-  if (!usdcAddress) {
-    throw new Error('USDC address not found for this network');
-  }
-  const likeLotteryDraw = await LikeLotteryDraw.deploy(usdcAddress);
-
+  const likeLotteryDraw = await LikeLotteryDraw.deploy();
   await likeLotteryDraw.deployed();
 
   console.log('LikeLotteryDraw deployed to:', likeLotteryDraw.address);

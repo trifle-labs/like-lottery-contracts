@@ -53,6 +53,7 @@
     "verify:likeLotteryDraw:local": "CONTRACT_NAME=LikeLotteryDraw hardhat run scripts/verify.ts --network localhost",
     "verify:likeLotteryDraw:baseSepolia": "CONTRACT_NAME=LikeLotteryDraw hardhat run scripts/verify.ts --network baseSepolia",
     "verify:likeLotteryDraw:base": "CONTRACT_NAME=LikeLotteryDraw hardhat run scripts/verify.ts --network base",
+    "emit-snapshot": "hardhat run scripts/emit-snapshot-hash.ts",
     "node": "hardhat node"
   },
   "devDependencies": {
@@ -61,10 +62,11 @@
     "@nomiclabs/hardhat-ethers": "^2.2.3",
     "@nomiclabs/hardhat-etherscan": "^3.1.8",
     "@nomiclabs/hardhat-waffle": "^2.0.6",
-    "@openzeppelin/hardhat-upgrades": "^2.5.0",
     "@openzeppelin/contracts": "^5.1.0",
+    "@openzeppelin/hardhat-upgrades": "^2.5.0",
     "@typechain/ethers-v6": "^0.5.1",
     "@typechain/hardhat": "^9.1.0",
+    "@nomicfoundation/hardhat-toolbox": "^6.1.0",
     "@types/chai": "^5.2.2",
     "@types/mocha": "^10.0.10",
     "@types/node": "^24.3.0",
