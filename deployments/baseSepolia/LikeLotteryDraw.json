@@ -1,5 +1,5 @@
 {
-  "address": "0x19462BeAc6904390EfD988fd6FaA3B90185A1108",
+  "address": "0xb4a7266d8FFA5a3BBAfAd07e66E725Ad57FcebC8",
   "abi": [
     {
       "type": "constructor",
@@ -23,23 +23,6 @@
         {
           "type": "address",
           "name": "account"
-        }
-      ]
-    },
-    {
-      "type": "event",
-      "anonymous": false,
-      "name": "Burn",
-      "inputs": [
-        {
-          "type": "address",
-          "name": "drawnBy",
-          "indexed": true
-        },
-        {
-          "type": "bytes32",
-          "name": "random",
-          "indexed": false
         }
       ]
     },
@@ -83,12 +66,21 @@
       ]
     },
     {
-      "type": "function",
-      "name": "burn",
-      "constant": false,
-      "payable": false,
-      "inputs": [],
-      "outputs": []
+      "type": "event",
+      "anonymous": false,
+      "name": "Yank",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "drawnBy",
+          "indexed": true
+        },
+        {
+          "type": "bytes32",
+          "name": "random",
+          "indexed": false
+        }
+      ]
     },
     {
       "type": "function",
@@ -157,12 +149,20 @@
         }
       ],
       "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "yank",
+      "constant": false,
+      "payable": false,
+      "inputs": [],
+      "outputs": []
     }
   ],
-  "transactionHash": "0xe537f19cd4cc21918207a7cc7d2a1be9e422ff49df85423f8e3f951805986790",
-  "blockNumber": 30911593,
+  "transactionHash": "0xb476e9756041941b637acf8ac92a94d3b1a324e40dd920666320330ed877559b",
+  "blockNumber": 30918830,
   "deployer": "0xc795344b1b30E3CfEE1AFA1D5204B141940CF445",
   "network": "baseSepolia",
   "chainId": 84532,
-  "timestamp": "2025-09-11T11:51:16.803Z"
+  "timestamp": "2025-09-11T15:52:26.587Z"
 }

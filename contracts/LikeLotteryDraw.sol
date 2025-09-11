@@ -10,11 +10,11 @@ contract LikeLotteryDraw is Ownable {
         uint256 indexed timestamp,
         uint256 indexed giveawayIndex
     );
-    event Burn(address indexed drawnBy, bytes32 random);
+    event Yank(address indexed drawnBy, bytes32 random);
 
     constructor() Ownable(msg.sender) {}
 
-    function burn() public {
+    function yank() public {
         uint256 lastBlockRandao = block.prevrandao;
         for (uint256 i = 0; i < 10; i++) {
             nonce = keccak256(
@@ -25,7 +25,7 @@ contract LikeLotteryDraw is Ownable {
                     block.timestamp
                 )
             );
-            emit Burn(msg.sender, nonce);
+            emit Yank(msg.sender, nonce);
         }
     }
 

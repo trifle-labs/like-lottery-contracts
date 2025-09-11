@@ -28,12 +28,20 @@ interface ApiResponse {
   };
 }
 
-async function fetchParticipantBalances(beforeDateTime: string): Promise<ApiResponse> {
-  const apiUrl = 'https://like-api.trifle.life/api/like-lottery/participants/balances';
+async function fetchLotteryDrawData(beforeDateTime: string): Promise<ApiResponse> {
+  // const apiUrl = 'https://like-api.trifle.life/api/like-lottery/lotteryDraw/create';
+  const apiUrl = 'http://localhost:3030/api/like-lottery/lotteryDraw/create';
   const url = new URL(apiUrl);
   url.searchParams.set('beforeDateTime', beforeDateTime);
 
-  console.log(`Fetching participant balances from: ${url.toString()}`);
+  // Add authentication
+  const apiSecret = process.env.API_SECRET;
+  if (!apiSecret) {
+    throw new Error('API_SECRET environment variable is required');
+  }
+  url.searchParams.set('secret', apiSecret);
+
+  console.log(`Fetching lottery draw data from: ${url.toString()}`);
 
   const response = await fetch(url.toString());
 
@@ -62,6 +70,9 @@ function generateSnapshotHash(participants: Participant[], timestamp: number): s
   console.log(`Snapshot data for ${participants.length} participants:`);
   console.log(JSON.stringify(structData, null, 2));
   console.log(`Timestamp: ${timestamp} (${new Date(timestamp * 1000).toISOString()})`);
+  console.log(
+    `Note: Timestamp is rounded down to seconds precision to match Solidity block.timestamp`
+  );
 
   // Pack each struct individually, then pack the array
   // Each struct: Player { uint256 fid, uint256 balance }
@@ -82,40 +93,17 @@ function generateSnapshotHash(participants: Participant[], timestamp: number): s
 }
 
 async function main() {
-  const args = process.argv.slice(2);
-
-  // Parse arguments - datetime is now optional
-  let beforeDateTime: string;
-  let giveawayIndex: number;
-
-  if (args.length === 0) {
-    // No arguments provided - use current datetime
-    beforeDateTime = new Date().toISOString();
-    giveawayIndex = 0;
-  } else if (args.length === 1) {
-    // One argument - could be datetime or giveawayIndex
-    if (args[0].match(/^\d+$/)) {
-      // It's a number (giveawayIndex)
-      beforeDateTime = new Date().toISOString();
-      giveawayIndex = parseInt(args[0], 10);
-    } else {
-      // It's a datetime string
-      beforeDateTime = args[0];
-      giveawayIndex = 0;
-    }
-  } else {
-    // Two arguments - datetime and giveawayIndex
-    beforeDateTime = args[0];
-    giveawayIndex = parseInt(args[1], 10);
-  }
+  // Get parameters from environment variables or use defaults
+  const beforeDateTime = process.env.BEFORE_DATETIME || new Date().toISOString();
+  const giveawayIndex = process.env.GIVEAWAY_INDEX ? parseInt(process.env.GIVEAWAY_INDEX, 10) : 0;
 
   // Validate date format if datetime was provided
   const dateRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/;
   if (!dateRegex.test(beforeDateTime)) {
-    console.error('Error: beforeDateTime must be in format YYYY-MM-DDTHH:mm:ss.sssZ');
+    console.error('Error: BEFORE_DATETIME must be in format YYYY-MM-DDTHH:mm:ss.sssZ');
     console.error('Example: 2024-01-15T12:00:00.000Z');
     console.error(
-      'Usage: npx hardhat run scripts/emit-snapshot-hash.ts --network <network> -- [beforeDateTime] [giveawayIndex]'
+      'Usage: BEFORE_DATETIME="2024-01-15T12:00:00.000Z" GIVEAWAY_INDEX=0 npx hardhat run scripts/emit-snapshot-hash.ts --network <network>'
     );
     process.exit(1);
   }
@@ -124,13 +112,14 @@ async function main() {
   console.log(`Giveaway index: ${giveawayIndex}`);
 
   try {
-    // Convert beforeDateTime to unix timestamp
+    // Convert beforeDateTime to unix timestamp (seconds precision, matching Solidity)
     const beforeDate = new Date(beforeDateTime);
-    const timestamp = Math.floor(beforeDate.getTime() / 1000); // Convert to unix timestamp
+    const timestamp = Math.floor(beforeDate.getTime() / 1000); // Convert to unix timestamp (seconds)
     console.log(`Unix timestamp: ${timestamp}`);
+    console.log(`Timestamp as ISO: ${new Date(timestamp * 1000).toISOString()}`);
 
-    // Fetch participant balances from API
-    const apiResponse = await fetchParticipantBalances(beforeDateTime);
+    // Fetch lottery draw data from API
+    const apiResponse = await fetchLotteryDrawData(beforeDateTime);
 
     console.log(`\nAPI Response Summary:`);
     console.log(`- Lottery: ${apiResponse.lottery.title} (${apiResponse.lottery.status})`);
