@@ -1,10 +1,168 @@
 {
-  "address": "0x0000000000000000000000000000000000000000",
-  "abi": [],
-  "transactionHash": "",
-  "blockNumber": 0,
-  "deployer": "0x0000000000000000000000000000000000000000",
+  "address": "0x309341C2CB8608102EBe9539f16a19E29759B7B5",
+  "abi": [
+    {
+      "type": "constructor",
+      "payable": false,
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "OwnableInvalidOwner",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "owner"
+        }
+      ]
+    },
+    {
+      "type": "error",
+      "name": "OwnableUnauthorizedAccount",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "account"
+        }
+      ]
+    },
+    {
+      "type": "event",
+      "anonymous": false,
+      "name": "GiveawayData",
+      "inputs": [
+        {
+          "type": "bytes32",
+          "name": "snapshotHash",
+          "indexed": true
+        },
+        {
+          "type": "uint256",
+          "name": "timestamp",
+          "indexed": true
+        },
+        {
+          "type": "uint256",
+          "name": "giveawayIndex",
+          "indexed": true
+        }
+      ]
+    },
+    {
+      "type": "event",
+      "anonymous": false,
+      "name": "OwnershipTransferred",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "previousOwner",
+          "indexed": true
+        },
+        {
+          "type": "address",
+          "name": "newOwner",
+          "indexed": true
+        }
+      ]
+    },
+    {
+      "type": "event",
+      "anonymous": false,
+      "name": "Yank",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "drawnBy",
+          "indexed": true
+        },
+        {
+          "type": "bytes32",
+          "name": "random",
+          "indexed": false
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "emitSnapshotHash",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        {
+          "type": "bytes32",
+          "name": "snapshotHash"
+        },
+        {
+          "type": "uint256",
+          "name": "timestamp"
+        },
+        {
+          "type": "uint256",
+          "name": "giveawayIndex"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "nonce",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "bytes32"
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "owner",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "address"
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "renounceOwnership",
+      "constant": false,
+      "payable": false,
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "transferOwnership",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        {
+          "type": "address",
+          "name": "newOwner"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "yank",
+      "constant": false,
+      "payable": false,
+      "inputs": [],
+      "outputs": []
+    }
+  ],
+  "transactionHash": "0x565d0a16d97e559ee1f9aa1c03c094d5f13029ce6a31868173a28e2176557932",
+  "blockNumber": 35409191,
+  "deployer": "0xc795344b1b30E3CfEE1AFA1D5204B141940CF445",
   "network": "base",
   "chainId": 8453,
-  "timestamp": "2024-01-01T00:00:00.000Z"
+  "timestamp": "2025-09-11T16:22:07.761Z"
 }

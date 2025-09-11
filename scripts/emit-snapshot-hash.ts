@@ -29,8 +29,7 @@ interface ApiResponse {
 }
 
 async function fetchLotteryDrawData(beforeDateTime: string): Promise<ApiResponse> {
-  // const apiUrl = 'https://like-api.trifle.life/api/like-lottery/lotteryDraw/create';
-  const apiUrl = 'http://localhost:3030/api/like-lottery/lotteryDraw/create';
+  const apiUrl = 'https://like-api.trifle.life/api/like-lottery/lotteryDraw/create';
   const url = new URL(apiUrl);
   url.searchParams.set('beforeDateTime', beforeDateTime);
 
