@@ -27,6 +27,9 @@
     "typechain-types",
     "dist"
   ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "license": "MIT",
   "scripts": {
     "compile": "hardhat compile",
