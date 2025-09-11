@@ -38,6 +38,7 @@
     "prebuild": "yarn clean",
     "test": "hardhat test",
     "test:coverage": "hardhat coverage",
+    "patch": "yarn build && npm version patch && npm publish && git push origin main",
     "deploy:local": "hardhat run scripts/deploy.ts --network localhost",
     "deploy:baseSepolia": "hardhat run scripts/deploy.ts --network baseSepolia",
     "deploy:base": "hardhat run scripts/deploy.ts --network base",
