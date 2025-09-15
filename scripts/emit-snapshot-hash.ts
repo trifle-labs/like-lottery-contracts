@@ -28,10 +28,11 @@ interface ApiResponse {
   };
 }
 
-async function fetchLotteryDrawData(beforeDateTime: string): Promise<ApiResponse> {
+async function createLotteryDrawData(beforeDateTime: string, prize: number): Promise<ApiResponse> {
   const apiUrl = 'https://like-api.trifle.life/api/like-lottery/lotteryDraw/create';
   const url = new URL(apiUrl);
   url.searchParams.set('beforeDateTime', beforeDateTime);
+  url.searchParams.set('prize', prize.toString());
 
   // Add authentication
   const apiSecret = process.env.API_SECRET;
@@ -92,9 +93,26 @@ function generateSnapshotHash(participants: Participant[], timestamp: number): s
 }
 
 async function main() {
-  // Get parameters from environment variables or use defaults
+  // Get parameters from environment variables
   const beforeDateTime = process.env.BEFORE_DATETIME || new Date().toISOString();
   const giveawayIndex = process.env.GIVEAWAY_INDEX ? parseInt(process.env.GIVEAWAY_INDEX, 10) : 0;
+  const prize = process.env.PRIZE;
+
+  // Validate required prize parameter
+  if (!prize) {
+    console.error('Error: PRIZE environment variable is required');
+    console.error(
+      'Usage: PRIZE=213.74 BEFORE_DATETIME="2024-01-15T12:00:00.000Z" GIVEAWAY_INDEX=0 npx hardhat run scripts/emit-snapshot-hash.ts --network <network>'
+    );
+    process.exit(1);
+  }
+
+  const prizeAmount = parseFloat(prize);
+  if (isNaN(prizeAmount) || prizeAmount <= 0) {
+    console.error('Error: PRIZE must be a positive number');
+    console.error('Example: PRIZE=1000 or PRIZE=213.74');
+    process.exit(1);
+  }
 
   // Validate date format if datetime was provided
   const dateRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/;
@@ -102,13 +120,14 @@ async function main() {
     console.error('Error: BEFORE_DATETIME must be in format YYYY-MM-DDTHH:mm:ss.sssZ');
     console.error('Example: 2024-01-15T12:00:00.000Z');
     console.error(
-      'Usage: BEFORE_DATETIME="2024-01-15T12:00:00.000Z" GIVEAWAY_INDEX=0 npx hardhat run scripts/emit-snapshot-hash.ts --network <network>'
+      'Usage: PRIZE=1000 BEFORE_DATETIME="2024-01-15T12:00:00.000Z" GIVEAWAY_INDEX=0 npx hardhat run scripts/emit-snapshot-hash.ts --network <network>'
     );
     process.exit(1);
   }
 
   console.log(`Emitting snapshot hash for datetime: ${beforeDateTime}`);
   console.log(`Giveaway index: ${giveawayIndex}`);
+  console.log(`Prize amount: ${prizeAmount}`);
 
   try {
     // Convert beforeDateTime to unix timestamp (seconds precision, matching Solidity)
@@ -118,7 +137,7 @@ async function main() {
     console.log(`Timestamp as ISO: ${new Date(timestamp * 1000).toISOString()}`);
 
     // Fetch lottery draw data from API
-    const apiResponse = await fetchLotteryDrawData(beforeDateTime);
+    const apiResponse = await createLotteryDrawData(beforeDateTime, prizeAmount);
 
     console.log(`\nAPI Response Summary:`);
     console.log(`- Lottery: ${apiResponse.lottery.title} (${apiResponse.lottery.status})`);

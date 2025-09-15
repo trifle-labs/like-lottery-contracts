@@ -1,5 +1,5 @@
 {
-  "address": "0x309341C2CB8608102EBe9539f16a19E29759B7B5",
+  "address": "0xa9563bF0D01EAD551b089750390Ab61801F0Dd65",
   "abi": [
     {
       "type": "constructor",
@@ -84,6 +84,32 @@
     },
     {
       "type": "function",
+      "name": "admin",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "address"
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "adminYank",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        {
+          "type": "address",
+          "name": "yanker"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
       "name": "emitSnapshotHash",
       "constant": false,
       "payable": false,
@@ -139,6 +165,19 @@
     },
     {
       "type": "function",
+      "name": "setAdmin",
+      "constant": false,
+      "payable": false,
+      "inputs": [
+        {
+          "type": "address",
+          "name": "_admin"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
       "name": "transferOwnership",
       "constant": false,
       "payable": false,
@@ -159,10 +198,10 @@
       "outputs": []
     }
   ],
-  "transactionHash": "0x565d0a16d97e559ee1f9aa1c03c094d5f13029ce6a31868173a28e2176557932",
-  "blockNumber": 35409191,
+  "transactionHash": "0xf7a84941278abbbc6bfaa58f7f9109853ce431e931307b06d539af62b86ccdb4",
+  "blockNumber": 35450673,
   "deployer": "0xc795344b1b30E3CfEE1AFA1D5204B141940CF445",
   "network": "base",
   "chainId": 8453,
-  "timestamp": "2025-09-11T16:22:07.761Z"
+  "timestamp": "2025-09-12T15:24:52.272Z"
 }
