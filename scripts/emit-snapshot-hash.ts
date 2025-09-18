@@ -20,8 +20,12 @@ interface ApiResponse {
     title: string;
     status: string;
   };
+  lottery_draw: {
+    snapshot_hash: string;
+  };
   before_datetime: string;
   participants: Participant[];
+  snapshot_hash: string;
   summary: {
     total_participants: number;
     total_balance: number;
@@ -143,9 +147,11 @@ async function main() {
     console.log(`- Lottery: ${apiResponse.lottery.title} (${apiResponse.lottery.status})`);
     console.log(`- Total participants: ${apiResponse.summary.total_participants}`);
     console.log(`- Total balance: ${apiResponse.summary.total_balance}`);
-
+    // console.log({ apiResponse });
+    const snapshotHash = apiResponse.lottery_draw.snapshot_hash;
+    console.log(`Snapshot hash: ${snapshotHash}`);
     // Generate snapshot hash with timestamp
-    const snapshotHash = generateSnapshotHash(apiResponse.participants, timestamp);
+    // const snapshotHash = generateSnapshotHash(apiResponse.participants, timestamp);
 
     // Get the contract instance
     const LikeLotteryDraw = await ethers.getContractFactory('LikeLotteryDraw');

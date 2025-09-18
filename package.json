@@ -58,6 +58,9 @@
     "verify:likeLotteryDraw:baseSepolia": "CONTRACT_NAME=LikeLotteryDraw hardhat run scripts/verify.ts --network baseSepolia",
     "verify:likeLotteryDraw:base": "CONTRACT_NAME=LikeLotteryDraw hardhat run scripts/verify.ts --network base",
     "emit-snapshot": "hardhat run scripts/emit-snapshot-hash.ts",
+    "yank:local": "hardhat run scripts/yank.ts --network localhost",
+    "yank:baseSepolia": "hardhat run scripts/yank.ts --network baseSepolia",
+    "yank:base": "hardhat run scripts/yank.ts --network base",
     "node": "hardhat node"
   },
   "devDependencies": {
