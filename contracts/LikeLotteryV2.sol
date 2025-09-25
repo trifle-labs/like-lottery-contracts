@@ -33,7 +33,7 @@ contract LikeLotteryV2 is Ownable {
         bytes memory signature
     ) internal view returns (bool) {
         bytes32 messageHash = keccak256(
-            abi.encodePacked("\x19Ethereum Signed Message:\n32", nonceValue)
+            abi.encodePacked("\x19Ethereum Signed Message:\n66", nonceValue)
         );
         bytes32 r;
         bytes32 s;

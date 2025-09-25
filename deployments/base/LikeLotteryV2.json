@@ -1,5 +1,5 @@
 {
-  "address": "0x3123FBC6BA601E92dA63B48142ba3Fe920F54D50",
+  "address": "0x2005b09ef4f87e881fc435E5A523E946dcEB0d52",
   "abi": [
     {
       "type": "constructor",
@@ -302,10 +302,10 @@
       ]
     }
   ],
-  "transactionHash": "0x2f1740b6c6cf7c0ff91f3e423858568616b140f5c087468264686810038619e9",
-  "blockNumber": 36002351,
+  "transactionHash": "0xe2d63df176c13b5ae6f78ec593b64c71095fe5a17a94c5a199c103960bf9212f",
+  "blockNumber": 36006369,
   "deployer": "0xc795344b1b30E3CfEE1AFA1D5204B141940CF445",
   "network": "base",
   "chainId": 8453,
-  "timestamp": "2025-09-25T09:54:12.112Z"
+  "timestamp": "2025-09-25T12:08:04.289Z"
 }

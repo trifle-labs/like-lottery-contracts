@@ -61,6 +61,10 @@
     "yank:local": "hardhat run scripts/yank.ts --network localhost",
     "yank:baseSepolia": "hardhat run scripts/yank.ts --network baseSepolia",
     "yank:base": "hardhat run scripts/yank.ts --network base",
+    "test-signature:v2": "ts-node scripts/test-signature-v2.ts",
+    "verify-signature:offline": "ts-node scripts/verify-signature-offline.ts",
+    "verify-signature:standalone": "ts-node scripts/verify-signature-standalone.ts",
+    "test-api-signature": "ts-node scripts/test-api-signature.ts",
     "node": "hardhat node"
   },
   "devDependencies": {
