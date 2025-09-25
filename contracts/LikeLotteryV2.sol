@@ -2,6 +2,8 @@
 pragma solidity ^0.8.27;
 
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
+import {ECDSA} from "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
+import {MessageHashUtils} from "@openzeppelin/contracts/utils/cryptography/MessageHashUtils.sol";
 
 contract LikeLotteryV2 is Ownable {
     bytes32 public nonce;
@@ -32,22 +34,11 @@ contract LikeLotteryV2 is Ownable {
         bytes32 nonceValue,
         bytes memory signature
     ) internal view returns (bool) {
-        bytes32 messageHash = keccak256(
-            abi.encodePacked("\x19Ethereum Signed Message:\n66", nonceValue)
-        );
-        bytes32 r;
-        bytes32 s;
-        uint8 v;
-
-        // Extract signature components
-        assembly {
-            r := mload(add(signature, 32))
-            s := mload(add(signature, 64))
-            v := byte(0, mload(add(signature, 96)))
-        }
-
-        // Recover the signer address
-        address signer = ecrecover(messageHash, v, r, s);
+        // Compute the EIP-191 digest for 32-byte data
+        // Equivalent to prefix "\x19Ethereum Signed Message:\n32" + nonce bytes
+        bytes32 digest = MessageHashUtils.toEthSignedMessageHash(nonceValue);
+        // Recover signer using OpenZeppelin's ECDSA (includes malleability checks)
+        address signer = ECDSA.recover(digest, signature);
         return signer == admin;
     }
 

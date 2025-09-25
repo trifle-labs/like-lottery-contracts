@@ -1,10 +1,35 @@
 {
-  "address": "0x2005b09ef4f87e881fc435E5A523E946dcEB0d52",
+  "address": "0x53E96ACF13dcb21e37bA1527868A2fBfd3d0d87C",
   "abi": [
     {
       "type": "constructor",
       "payable": false,
       "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "ECDSAInvalidSignature",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "ECDSAInvalidSignatureLength",
+      "inputs": [
+        {
+          "type": "uint256",
+          "name": "length"
+        }
+      ]
+    },
+    {
+      "type": "error",
+      "name": "ECDSAInvalidSignatureS",
+      "inputs": [
+        {
+          "type": "bytes32",
+          "name": "s"
+        }
+      ]
     },
     {
       "type": "error",
@@ -302,10 +327,10 @@
       ]
     }
   ],
-  "transactionHash": "0xe2d63df176c13b5ae6f78ec593b64c71095fe5a17a94c5a199c103960bf9212f",
-  "blockNumber": 36006369,
+  "transactionHash": "0xe75cdc0dd4acd736e7d5a5175329ce5d2afb6faf20eba925176b7ad17e624362",
+  "blockNumber": 36006876,
   "deployer": "0xc795344b1b30E3CfEE1AFA1D5204B141940CF445",
   "network": "base",
   "chainId": 8453,
-  "timestamp": "2025-09-25T12:08:04.289Z"
+  "timestamp": "2025-09-25T12:24:59.333Z"
 }

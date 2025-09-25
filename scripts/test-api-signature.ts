@@ -10,7 +10,7 @@ function verifySignatureContractStyle(
     // This is exactly what the contract does in verifySignature function
     // Contract calculates: keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", nonce))
     const messageHash = ethers.utils.keccak256(
-      ethers.utils.solidityPack(['string', 'bytes32'], ['\x19Ethereum Signed Message:\n32', nonce])
+      ethers.utils.solidityPack(['string', 'bytes32'], ['\x19Ethereum Signed Message:\n66', nonce])
     );
 
     // Extract signature components (same as contract assembly)
@@ -55,7 +55,7 @@ async function querySignNonceAPI(
       throw new Error(`API request failed: ${response.status} - ${errorText}`);
     }
 
-    const result = await response.json();
+    const result: any = await response.json();
     console.log('API Response:', JSON.stringify(result, null, 2));
 
     if (!result.success) {
@@ -112,10 +112,7 @@ async function main() {
     // Step 3: Standard ethers verification for comparison
     console.log('\n=== Step 3: Standard Ethers Verification ===');
     try {
-      const recoveredAddress = ethers.utils.verifyMessage(
-        ethers.utils.arrayify(apiResult.nonce),
-        apiResult.signature
-      );
+      const recoveredAddress = ethers.utils.verifyMessage(apiResult.nonce, apiResult.signature);
       console.log(`Recovered address: ${recoveredAddress}`);
       console.log(`Expected address: ${expectedAdminAddress}`);
       console.log(
@@ -155,7 +152,7 @@ async function main() {
       const messageHash = ethers.utils.keccak256(
         ethers.utils.solidityPack(
           ['string', 'bytes32'],
-          ['\x19Ethereum Signed Message:\n32', apiResult.nonce]
+          ['\x19Ethereum Signed Message:\n66', apiResult.nonce]
         )
       );
 
