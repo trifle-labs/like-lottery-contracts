@@ -1,0 +1,410 @@
+{
+  "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+  "abi": [
+    {
+      "type": "constructor",
+      "payable": false,
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "ECDSAInvalidSignature",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "ECDSAInvalidSignatureLength",
+      "inputs": [
+        {
+          "type": "uint256",
+          "name": "length"
+        }
+      ]
+    },
+    {
+      "type": "error",
+      "name": "ECDSAInvalidSignatureS",
+      "inputs": [
+        {
+          "type": "bytes32",
+          "name": "s"
+        }
+      ]
+    },
+    {
+      "type": "error",
+      "name": "OwnableInvalidOwner",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "owner"
+        }
+      ]
+    },
+    {
+      "type": "error",
+      "name": "OwnableUnauthorizedAccount",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "account"
+        }
+      ]
+    },
+    {
+      "type": "event",
+      "anonymous": false,
+      "name": "Crank",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "user",
+          "indexed": true
+        },
+        {
+          "type": "uint256",
+          "name": "timestamp",
+          "indexed": true
+        }
+      ]
+    },
+    {
+      "type": "event",
+      "anonymous": false,
+      "name": "GiveawayData",
+      "inputs": [
+        {
+          "type": "bytes32",
+          "name": "snapshotHash",
+          "indexed": true
+        },
+        {
+          "type": "uint256",
+          "name": "timestamp",
+          "indexed": true
+        },
+        {
+          "type": "uint256",
+          "name": "giveawayIndex",
+          "indexed": true
+        }
+      ]
+    },
+    {
+      "type": "event",
+      "anonymous": false,
+      "name": "OwnershipTransferred",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "previousOwner",
+          "indexed": true
+        },
+        {
+          "type": "address",
+          "name": "newOwner",
+          "indexed": true
+        }
+      ]
+    },
+    {
+      "type": "event",
+      "anonymous": false,
+      "name": "Yank",
+      "inputs": [
+        {
+          "type": "address",
+          "name": "drawnBy",
+          "indexed": true
+        },
+        {
+          "type": "bytes32",
+          "name": "random",
+          "indexed": false
+        },
+        {
+          "type": "uint256",
+          "name": "drawId",
+          "indexed": true
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "admin",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "gas": 29000000,
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "address"
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "adminYank",
+      "constant": false,
+      "payable": false,
+      "gas": 29000000,
+      "inputs": [
+        {
+          "type": "address",
+          "name": "yanker"
+        },
+        {
+          "type": "uint256",
+          "name": "drawId"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "crank",
+      "constant": false,
+      "payable": false,
+      "gas": 29000000,
+      "inputs": [
+        {
+          "type": "bytes32",
+          "name": "nonceValue"
+        },
+        {
+          "type": "bytes",
+          "name": "signature"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "emitSnapshotHash",
+      "constant": false,
+      "payable": false,
+      "gas": 29000000,
+      "inputs": [
+        {
+          "type": "bytes32",
+          "name": "snapshotHash"
+        },
+        {
+          "type": "uint256",
+          "name": "timestamp"
+        },
+        {
+          "type": "uint256",
+          "name": "giveawayIndex"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "isNonceUsed",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "gas": 29000000,
+      "inputs": [
+        {
+          "type": "bytes32",
+          "name": "nonceValue"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "nonce",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "gas": 29000000,
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "bytes32"
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "owner",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "gas": 29000000,
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "address"
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "renounceOwnership",
+      "constant": false,
+      "payable": false,
+      "gas": 29000000,
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "setAdmin",
+      "constant": false,
+      "payable": false,
+      "gas": 29000000,
+      "inputs": [
+        {
+          "type": "address",
+          "name": "_admin"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "setYankCost",
+      "constant": false,
+      "payable": false,
+      "gas": 29000000,
+      "inputs": [
+        {
+          "type": "uint256",
+          "name": "_yankCost"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "setYankLoopCount",
+      "constant": false,
+      "payable": false,
+      "gas": 29000000,
+      "inputs": [
+        {
+          "type": "uint256",
+          "name": "_yankLoopCount"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "transferOwnership",
+      "constant": false,
+      "payable": false,
+      "gas": 29000000,
+      "inputs": [
+        {
+          "type": "address",
+          "name": "newOwner"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "usedNonces",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "gas": 29000000,
+      "inputs": [
+        {
+          "type": "bytes32"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "withdraw",
+      "constant": false,
+      "payable": false,
+      "gas": 29000000,
+      "inputs": [
+        {
+          "type": "uint256",
+          "name": "amount"
+        },
+        {
+          "type": "address",
+          "name": "to"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "yank",
+      "constant": false,
+      "stateMutability": "payable",
+      "payable": true,
+      "gas": 29000000,
+      "inputs": [
+        {
+          "type": "bytes32",
+          "name": "nonceValue"
+        },
+        {
+          "type": "bytes",
+          "name": "signature"
+        },
+        {
+          "type": "uint256",
+          "name": "drawId"
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "type": "function",
+      "name": "yankCost",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "gas": 29000000,
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "uint256"
+        }
+      ]
+    },
+    {
+      "type": "function",
+      "name": "yankLoopCount",
+      "constant": true,
+      "stateMutability": "view",
+      "payable": false,
+      "gas": 29000000,
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "uint256"
+        }
+      ]
+    }
+  ],
+  "transactionHash": "0xd8267e057941eaef8f6fc68e02d6793183752ddc0c641cd1fc4efc74e6dee792",
+  "blockNumber": 1,
+  "deployer": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+  "network": "hardhat",
+  "chainId": 31337,
+  "timestamp": "2025-10-10T13:04:17.983Z"
+}

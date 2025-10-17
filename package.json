@@ -65,6 +65,8 @@
     "verify-signature:offline": "ts-node scripts/verify-signature-offline.ts",
     "verify-signature:standalone": "ts-node scripts/verify-signature-standalone.ts",
     "test-api-signature": "ts-node scripts/test-api-signature.ts",
+    "deploy:generic": "hardhat run scripts/deploy-generic.ts",
+    "verify:generic": "hardhat run scripts/verify-generic.ts",
     "node": "hardhat node"
   },
   "devDependencies": {

@@ -1,5 +1,7 @@
 import { ethers } from 'hardhat';
 
+const rate = 15000;
+
 async function main() {
   // Get the yanker address from environment variable
   const yankerAddress = process.env.YANKER_ADDRESS;
@@ -98,14 +100,14 @@ async function main() {
     console.log(`\nCalling adminYank...`);
     let gasPrice = ethers.utils.parseUnits('0.006', 'gwei');
     console.log(`Using gas price: ${ethers.utils.formatUnits(gasPrice, 'gwei')} GWEI`);
-    console.log(`Using gas limit: 50,000`);
+    console.log(`Using gas limit: 85,000`);
 
     let tx;
     try {
       tx = await contract.adminYank(yankerAddress, {
         gasPrice: gasPrice,
         nonce: nonce,
-        gasLimit: 50000,
+        gasLimit: 85000,
       });
     } catch (error: any) {
       // Check if it's a gas price error
@@ -130,7 +132,7 @@ async function main() {
             tx = await contract.adminYank(yankerAddress, {
               gasPrice: adjustedGasPrice,
               nonce: nonce,
-              gasLimit: 50000,
+              gasLimit: 85000,
             });
             console.log(`✅ Retry successful with adjusted gas price`);
           } catch (retryError: any) {
@@ -146,7 +148,7 @@ async function main() {
             tx = await contract.adminYank(yankerAddress, {
               gasPrice: fallbackGasPrice,
               nonce: nonce,
-              gasLimit: 50000,
+              gasLimit: 85000,
             });
             console.log(`✅ Retry successful with fallback gas price`);
           } catch (retryError: any) {
@@ -169,7 +171,7 @@ async function main() {
           tx = await contract.adminYank(yankerAddress, {
             gasPrice: higherGasPrice,
             nonce: nonce,
-            gasLimit: 50000,
+            gasLimit: 85000,
           });
           console.log(`✅ Retry successful with higher gas price`);
         } catch (retryError: any) {
@@ -189,7 +191,7 @@ async function main() {
           tx = await contract.adminYank(yankerAddress, {
             gasPrice: higherGasPrice,
             nonce: nonce,
-            gasLimit: 50000,
+            gasLimit: 85000,
           });
           console.log(`✅ Retry successful with higher gas price`);
         } catch (retryError: any) {
@@ -212,13 +214,18 @@ async function main() {
       receipt = await Promise.race([
         tx.wait(),
         new Promise((_, reject) =>
-          setTimeout(() => reject(new Error('Confirmation timeout after 11 seconds')), 11000)
+          setTimeout(
+            () => reject(new Error(`Confirmation timeout after ${rate / 1000} seconds`)),
+            rate
+          )
         ),
       ]);
     } catch (error: any) {
       if (error.message.includes('Confirmation timeout')) {
         console.log(
-          `\n⚠️  Confirmation timeout after 11 seconds, retrying with higher gas price...`
+          `\n⚠️  Confirmation timeout after ${
+            rate / 1000
+          } seconds, retrying with higher gas price...`
         );
         hadTimeout = true;
 
@@ -232,7 +239,7 @@ async function main() {
           const retryTx = await contract.adminYank(yankerAddress, {
             gasPrice: higherGasPrice,
             nonce: nonce,
-            gasLimit: 50000,
+            gasLimit: 85000,
           });
           console.log(`Retry transaction submitted: ${retryTx.hash}`);
           console.log('Waiting for retry confirmation...');
@@ -252,8 +259,8 @@ async function main() {
     if (hadTimeout) {
       console.log('Transaction confirmed (timeout retry), skipping additional wait...');
     } else {
-      console.log('Transaction confirmed, waiting 11 seconds for nonce to update...');
-      await new Promise((resolve) => setTimeout(resolve, 11000));
+      console.log(`Transaction confirmed, waiting ${rate / 1000} seconds for nonce to update...`);
+      await new Promise((resolve) => setTimeout(resolve, rate));
     }
     console.log(`Transaction confirmed in block ${receipt.blockNumber}`);
     console.log(`Gas used: ${receipt.gasUsed.toString()}`);
